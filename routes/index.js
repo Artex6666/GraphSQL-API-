@@ -3,7 +3,7 @@ const router = express.Router();
 
 // Import des routeurs
 const healthRoutes = require('./healthRoutes');
-
+const kennedyRoutes = require('./kennedyRoutes');
 /**
  * Routeur principal qui regroupe tous les routeurs de l'API
  */
@@ -25,5 +25,7 @@ router.get('/', (req, res) => {
         timestamp: new Date().toISOString()
     });
 });
+
+router.use('/kennedy', kennedyRoutes);
 
 module.exports = router;

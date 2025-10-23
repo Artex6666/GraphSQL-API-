@@ -11,11 +11,6 @@ const swaggerOptions = {
             title: 'NoSQL Graph API',
             version: '1.0.0',
             description: 'API Express pour la gestion de graphes NoSQL avec authentification JWT',
-            
-            license: {
-                name: 'MIT',
-                url: 'https://opensource.org/licenses/MIT'
-            }
         },
         servers: [
             {
@@ -110,6 +105,23 @@ const swaggerOptions = {
                         environment: {
                             type: 'string',
                             example: 'development'
+                        }
+                    }
+                },
+                Kennedy: {
+                    type: 'object',
+                    properties: {
+                        id: {
+                            type: 'string',
+                            example: '1'
+                        },
+                        name: {
+                            type: 'string',
+                            example: 'John Kennedy'
+                        },
+                        birthDate: {
+                            type: 'string',
+                            example: '1917-05-29'
                         }
                     }
                 }

@@ -52,9 +52,6 @@ const optionalAuth = (req, res, next) => {
     });
 };
 
-/**
- * Génère un token JWT pour un utilisateur
- */
 const generateToken = (payload) => {
     return jwt.sign(payload, config.jwt.secret, { 
         expiresIn: config.jwt.expiresIn 

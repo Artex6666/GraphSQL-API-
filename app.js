@@ -34,11 +34,11 @@ const PORT = config.app.port || 2000;
 app.listen(PORT, () => {
     console.log(`🚀 API démarrée sur le port ${PORT}`.green);
     console.log(`📊 Endpoints disponibles:`.cyan);
-    console.log(`   - GET  /api/alive  - Vérifier que l'API est en vie`.white);
-    console.log(`   - GET  /api/health - Santé complète de l'API`.white);
-    console.log(`   - GET  /api/info  - Informations sur l'API`.white);
-    console.log(`   - GET  /api/      - Page d'accueil de l'API`.white);
+    console.log(`   - GET  /api/alive  `.yellow + `- Vérifier que l'API est en vie`.white);
+    console.log(`   - GET  /api/health `.yellow + `- Santé complète de l'API`.white);
+    console.log(`   - GET  /api/info  `.yellow + `- Informations sur l'API`.white);
+    console.log(`   - GET  /api/      `.yellow + `- Page d'accueil de l'API`.white);
     console.log(`📚 Documentation Swagger:`.cyan);
-    console.log(`   - GET  /api-docs  - Documentation interactive de l'API`.white);
+    console.log(`   - GET  /api-docs  `.yellow);
 });
 
