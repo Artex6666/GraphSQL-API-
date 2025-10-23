@@ -3,8 +3,35 @@
  */
 
 /**
- * Route pour vérifier que l'API est en vie
- * GET /api/alive
+ * @swagger
+ * /alive:
+ *   get:
+ *     summary: Vérifier que l'API est en vie
+ *     description: Endpoint simple pour vérifier que l'API fonctionne
+ *     tags: [Health]
+ *     responses:
+ *       200:
+ *         description: API en ligne
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "API en ligne"
+ *                 timestamp:
+ *                   type: string
+ *                   format: date-time
+ *                 uptime:
+ *                   type: number
+ *                 version:
+ *                   type: string
+ *                 environment:
+ *                   type: string
  */
 const getAlive = (req, res) => {
     try {
@@ -28,8 +55,19 @@ const getAlive = (req, res) => {
 };
 
 /**
- * Route pour vérifier la santé complète de l'API
- * GET /api/health
+ * @swagger
+ * /health:
+ *   get:
+ *     summary: Vérifier la santé complète de l'API
+ *     description: Endpoint détaillé pour vérifier la santé de l'API avec informations système
+ *     tags: [Health]
+ *     responses:
+ *       200:
+ *         description: Santé de l'API
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/HealthResponse'
  */
 const getHealth = (req, res) => {
     try {
@@ -57,8 +95,37 @@ const getHealth = (req, res) => {
 };
 
 /**
- * Route pour obtenir des informations sur l'API
- * GET /api/info
+ * @swagger
+ * /info:
+ *   get:
+ *     summary: Obtenir des informations sur l'API
+ *     description: Retourne les informations générales sur l'API
+ *     tags: [Health]
+ *     responses:
+ *       200:
+ *         description: Informations sur l'API
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 name:
+ *                   type: string
+ *                   example: "NoSQL Graph API"
+ *                 description:
+ *                   type: string
+ *                 version:
+ *                   type: string
+ *                 author:
+ *                   type: string
+ *                 endpoints:
+ *                   type: object
+ *                 timestamp:
+ *                   type: string
+ *                   format: date-time
  */
 const getInfo = (req, res) => {
     try {

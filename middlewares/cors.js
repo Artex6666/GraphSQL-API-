@@ -1,4 +1,5 @@
 const config = require('../config/config');
+const logger = require('../utils/logger');
 
 /**
  * Middleware CORS personnalisé
@@ -21,11 +22,19 @@ const corsMiddleware = (req, res, next) => {
 };
 
 /**
- * Middleware de logging des requêtes
+ * Middleware de logging des requêtes avec le système de log personnalisé
  */
 const requestLogger = (req, res, next) => {
-    const timestamp = new Date().toISOString();
-    console.log(`[${timestamp}] ${req.method} ${req.path} - ${req.ip}`);
+    const startTime = Date.now();
+    
+    // Intercepter la fin de la réponse
+    const originalSend = res.send;
+    res.send = function(data) {
+        const responseTime = Date.now() - startTime;
+        logger.http(req, res, responseTime);
+        originalSend.call(this, data);
+    };
+
     next();
 };
 
@@ -33,7 +42,8 @@ const requestLogger = (req, res, next) => {
  * Middleware de gestion d'erreurs global
  */
 const errorHandler = (err, req, res, next) => {
-    console.error('Erreur:', err);
+    // Logger l'erreur
+    logger.appError(err, req);
 
     // Erreur de validation JWT
     if (err.name === 'JsonWebTokenError') {

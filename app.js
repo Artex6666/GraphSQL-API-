@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const config = require('./config/config');
 const colors = require('colors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./config/swagger');
 
 // Import des middlewares
 const { corsMiddleware, requestLogger, errorHandler, notFound } = require('./middlewares/cors');
@@ -15,13 +17,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(corsMiddleware);
 app.use(requestLogger);
 
-// Routes de l'API
+// Configuration Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+    customCss: '.swagger-ui .topbar { display: none }',
+    customSiteTitle: 'NoSQL Graph API Documentation'
+}));
+
 app.use('/api', apiRoutes);
 
-// Middleware pour les routes non trouvées
 app.use(notFound);
 
-// Middleware de gestion d'erreurs (doit être en dernier)
 app.use(errorHandler);
 
 // Démarrage du serveur
@@ -33,5 +38,7 @@ app.listen(PORT, () => {
     console.log(`   - GET  /api/health - Santé complète de l'API`.white);
     console.log(`   - GET  /api/info  - Informations sur l'API`.white);
     console.log(`   - GET  /api/      - Page d'accueil de l'API`.white);
+    console.log(`📚 Documentation Swagger:`.cyan);
+    console.log(`   - GET  /api-docs  - Documentation interactive de l'API`.white);
 });
 
